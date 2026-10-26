@@ -1,0 +1,16 @@
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/bin/Debug/net10.0/ParkSure.Services.deps.json
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/bin/Debug/net10.0/ParkSure.Services.dll
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/bin/Debug/net10.0/ParkSure.Services.pdb
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/bin/Debug/net10.0/ParkSure.Repositories.dll
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/bin/Debug/net10.0/ParkSure.Repositories.pdb
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ParkSure.Services.csproj.AssemblyReference.cache
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ParkSure.Services.GeneratedMSBuildEditorConfig.editorconfig
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ParkSure.Services.AssemblyInfoInputs.cache
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ParkSure.Services.AssemblyInfo.cs
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ParkSure.Services.csproj.CoreCompileInputs.cache
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ParkSure.Services.sourcelink.json
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ParkSure.758E57BB.Up2Date
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ParkSure.Services.dll
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/refint/ParkSure.Services.dll
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ParkSure.Services.pdb
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Services/obj/Debug/net10.0/ref/ParkSure.Services.dll

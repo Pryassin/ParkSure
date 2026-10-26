@@ -1,0 +1,13 @@
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/bin/Debug/net10.0/ParkSure.Repositories.deps.json
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/bin/Debug/net10.0/ParkSure.Repositories.dll
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/bin/Debug/net10.0/ParkSure.Repositories.pdb
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/ParkSure.Repositories.csproj.AssemblyReference.cache
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/ParkSure.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/ParkSure.Repositories.AssemblyInfoInputs.cache
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/ParkSure.Repositories.AssemblyInfo.cs
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/ParkSure.Repositories.csproj.CoreCompileInputs.cache
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/ParkSure.Repositories.sourcelink.json
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/ParkSure.Repositories.dll
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/refint/ParkSure.Repositories.dll
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/ParkSure.Repositories.pdb
+/home/abdel-pc/Downloads/ParkSure/ParkSure.Repositories/obj/Debug/net10.0/ref/ParkSure.Repositories.dll
