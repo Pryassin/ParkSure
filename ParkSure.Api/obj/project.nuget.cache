@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "WCkshDYoU+k=",
+  "success": true,
+  "projectFilePath": "/home/abdel-pc/Downloads/ParkSure/ParkSure.Api/ParkSure.Api.csproj",
+  "expectedPackageFiles": [
+    "/home/abdel-pc/.nuget/packages/microsoft.aspnetcore.openapi/10.0.12/microsoft.aspnetcore.openapi.10.0.12.nupkg.sha512",
+    "/home/abdel-pc/.nuget/packages/microsoft.openapi/2.12.0/microsoft.openapi.2.12.0.nupkg.sha512",
+    "/home/abdel-pc/.nuget/packages/npgsql/10.0.3/npgsql.10.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

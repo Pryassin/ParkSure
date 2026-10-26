@@ -1,0 +1,6 @@
+@ParkSure.Api_HostAddress = http://localhost:5277
+
+GET {{ParkSure.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

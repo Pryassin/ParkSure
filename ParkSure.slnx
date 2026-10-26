@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ParkSure.Api/ParkSure.Api.csproj" />
+  <Project Path="ParkSure.Repositories/ParkSure.Repositories.csproj" />
+  <Project Path="ParkSure.Services/ParkSure.Services.csproj" />
+</Solution>
