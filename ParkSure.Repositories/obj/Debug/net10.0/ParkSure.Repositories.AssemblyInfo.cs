@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ParkSure.Repositories")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4c3ecf1cdbdf909a88899f9d5a0916b40e46010")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c2e99bf90a93527a571d7e503b016cdb03c104a")]
 [assembly: System.Reflection.AssemblyProductAttribute("ParkSure.Repositories")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ParkSure.Repositories")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
