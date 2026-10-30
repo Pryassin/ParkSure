@@ -1,7 +1,3 @@
-cd ~/Downloads/ParkSure
-git checkout main
-
-cat << 'EOF' > README.md
 # ParkSure
 
 **Can I park here?** A Montréal street-parking app that answers honestly.
@@ -57,22 +53,19 @@ not per exact meter, in v1.
 - **Backend:** ASP.NET Core (.NET 10) Clean / 3-Tier Architecture
 - **Database:** PostgreSQL + PostGIS
 - **Testing:** xUnit
-- **API (planned):** `GET /api/curbs?bbox=&at=&permit=`,
-  `GET /api/curbs/at?lat=&lon=&at=&permit=`, `GET /api/data-status`
-  — both evaluator endpoints call the same evaluator, so answers never
-  disagree.
+- **API (available):**
+  - `GET /api/curbs/at?lat=&lon=&mode=&at=&permit=`
+  - `GET /api/curbs/lookup?lat=&lon=&mode=`
+  - `GET /api/curbs/{segmentId}`
+  - `GET /api/health`
+  - `GET /api/dev/rule-check` (Development only)
 
 ## Data
 
-- **Signs:** Ville de Montréal open data, *Stationnement sur rue —
-  signalisation courante* (~144,690 signs, 1,546 codes). City sign
-  coordinates are approximate and the dataset can lag behind the street,
-  which is one more reason unknown exists.
+- **Signs:** Ville de Montréal open data, *Stationnement sur rue — signalisation courante* (~144,690 signs, 1,546 codes). City sign coordinates are approximate and the dataset can lag behind the street, which is one more reason unknown exists.
 - **Curbs:** Ville de Montréal *Géobase double* (~91,606 curb sides).
-- **Sign text reference:** the December 2015 *Catalogue de signalisation*
-  (backup only — the city's own sign descriptions come first).
-- **Dictionary:** Every code's rule is reviewed before it reaches the app.
-  Unreviewed codes → unknown. Nothing ships on an unreviewed guess.
+- **Sign text reference:** the December 2015 *Catalogue de signalisation* (backup only — the city's own sign descriptions come first).
+- **Dictionary:** Every code's rule is reviewed before it reaches the app. Unreviewed codes → unknown. Nothing ships on an unreviewed guess.
 
 ## Project status
 
@@ -84,24 +77,18 @@ not per exact meter, in v1.
 | Reviewed rules | ✅ 200 of 1,546 codes loaded, growing |
 | Evaluator (the decision logic) | ✅ Done (Milestone B3: pure zero-I/O engine) |
 | Unit Tests | ✅ Done (93/93 tests passing) |
-| API | 🔄 In progress (Milestone B4: integration & `/api/curbs/at`) |
+| API | ✅ Done (Milestone B4: integration & `/api/curbs/at`) |
 | App UI (Flutter) | 📋 Planned |
 
 ## Key decisions (locked for v1)
 
 - **Pure logic engine.** Core evaluation logic is isolated from I/O, database access, network requests, and system clock dependencies.
 - **Most-restrictive-wins.** Prohibitions unconditionally override permissions. Priority numbers pick the reason text only — they never change the status.
-- **Arrows ignored.** The sign arrow field (`FLECHE_PAN`) is undocumented
-  and unresolved — v1 ignores it entirely.
-- **Permits in the MVP.** One SRR permit zone per user, normalized
-  (lowercase, strip non-alphanumerics, strip leading zeros).
-- **No-data areas.** The 15 non-Montréal municipalities on the island
-  (DDO, Pointe-Claire, Dorval, …) have no city sign data and return `NoDataArea`, not grey.
-- **Middle-of-street taps.** If a tap is nearly equidistant from both
-  sides, the app shows both lines and lets the user pick a side — it never
-  silently guesses. GPS checks use nearest.
-- **30 m, inclusive.** Nearest curb within 30.0 m counts; beyond that,
-  unknown. Distance is measured to the whole curb line.
+- **Arrows ignored.** The sign arrow field (`FLECHE_PAN`) is undocumented and unresolved — v1 ignores it entirely.
+- **Permits in the MVP.** One SRR permit zone per user, normalized (lowercase, strip non-alphanumerics, strip leading zeros).
+- **No-data areas.** The 15 non-Montréal municipalities on the island (DDO, Pointe-Claire, Dorval, …) have no city sign data and return `NoDataArea`, not grey.
+- **Middle-of-street taps.** If a tap is nearly equidistant from both sides (within 2.0 m margin), the app returns both candidate lines (`ambiguous`) so the user can choose. GPS checks pick nearest.
+- **30 m, inclusive.** Nearest curb within 30.0 m counts; beyond that, unknown (`NoCurb`). Distance is measured to the whole curb line.
 
 ## Project layout
 
@@ -114,15 +101,18 @@ ParkSure/
 ├── db/                      # Schema, migrations, bulk rule loading SQL
 └── docs/                    # Specifications, ADRs, test scenarios
 
+
 ## Running the tests
 
 Prerequisites: .NET 10 SDK, PostgreSQL + PostGIS.
 
 To run the full unit test suite:
 
+```bash
 dotnet test
 
 To run tests with detailed console logs:
+Bash
 
 dotnet test --logger "console;verbosity=detailed"
 
