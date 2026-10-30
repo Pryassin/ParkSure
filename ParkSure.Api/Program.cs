@@ -24,12 +24,18 @@ builder.Services.AddScoped<UnknownLogRepository>();
 builder.Services.AddScoped<HealthService>();
 builder.Services.AddScoped<CurbLookupService>();
 builder.Services.AddScoped<CurbStatusService>();
+builder.Services.AddSingleton<RuleCatalog>();        // parsed rules kept in memory, refreshed every 5 minutes
+builder.Services.AddScoped<CurbMapRepository>();
+builder.Services.AddScoped<CurbMapService>();
 
+// ---- optional but recommended on mobile data: compress the map responses (about 5x smaller) ----
+builder.Services.AddResponseCompression();
 // Web API & OpenAPI
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+app.UseResponseCompression();
 
 if (app.Environment.IsDevelopment())
 {

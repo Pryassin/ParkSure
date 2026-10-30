@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "2g5WUWI8p04=",
+  "dgSpecHash": "KXI3TKDHwgc=",
   "success": true,
   "projectFilePath": "/home/abdel-pc/Downloads/ParkSure/ParkSure.Tests/ParkSure.Tests.csproj",
   "expectedPackageFiles": [
     "/home/abdel-pc/.nuget/packages/coverlet.collector/6.0.4/coverlet.collector.6.0.4.nupkg.sha512",
     "/home/abdel-pc/.nuget/packages/microsoft.codecoverage/17.14.1/microsoft.codecoverage.17.14.1.nupkg.sha512",
-    "/home/abdel-pc/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.0/microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
-    "/home/abdel-pc/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.0/microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
+    "/home/abdel-pc/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.14/microsoft.extensions.dependencyinjection.abstractions.10.0.14.nupkg.sha512",
+    "/home/abdel-pc/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.14/microsoft.extensions.logging.abstractions.10.0.14.nupkg.sha512",
     "/home/abdel-pc/.nuget/packages/microsoft.net.test.sdk/17.14.1/microsoft.net.test.sdk.17.14.1.nupkg.sha512",
     "/home/abdel-pc/.nuget/packages/microsoft.testplatform.objectmodel/17.14.1/microsoft.testplatform.objectmodel.17.14.1.nupkg.sha512",
     "/home/abdel-pc/.nuget/packages/microsoft.testplatform.testhost/17.14.1/microsoft.testplatform.testhost.17.14.1.nupkg.sha512",
