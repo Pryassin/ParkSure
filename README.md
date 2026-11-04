@@ -102,6 +102,24 @@ ParkSure/
 └── docs/                    # Specifications, ADRs, test scenarios
 
 
+## Configuration
+
+The database connection string is **not** stored in the repo. Set it once per machine with .NET user-secrets (stored in `~/.microsoft/usersecrets/`, outside the repo):
+
+```bash
+dotnet user-secrets set "ConnectionStrings:Default" \
+  "Host=localhost;Port=5433;Database=parking;Username=postgres;Password=<your password>" \
+  --project ParkSure.Api
+```
+
+Or use an environment variable (works on servers and in CI):
+
+```bash
+export ConnectionStrings__Default="Host=...;Password=..."
+```
+
+User-secrets are only loaded in the `Development` environment, which is the default for `dotnet run`.
+
 ## Running the tests
 
 Prerequisites: .NET 10 SDK, PostgreSQL + PostGIS.

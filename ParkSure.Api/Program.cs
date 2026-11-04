@@ -7,7 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configuration & Database
 var cs = builder.Configuration.GetConnectionString("Default")
-         ?? throw new InvalidOperationException("Connection string 'Default' is missing");
+         ?? throw new InvalidOperationException(
+             "Connection string 'Default' is missing. Set it with " +
+             "'dotnet user-secrets set \"ConnectionStrings:Default\" \"<connection string>\" --project ParkSure.Api' " +
+             "or the ConnectionStrings__Default environment variable.");
 
 builder.Services.AddSingleton(NpgsqlDataSource.Create(cs));
 
