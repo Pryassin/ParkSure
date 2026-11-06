@@ -39,10 +39,15 @@ app.UseResponseCompression();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.MapOpenApi();                       // serves /openapi/v1.json
+    app.UseSwaggerUI(o =>                    // UI at /swagger
+    {
+        o.SwaggerEndpoint("/openapi/v1.json", "ParkSure API v1");
+    });
 }
 
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

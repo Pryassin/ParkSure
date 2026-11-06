@@ -54,6 +54,7 @@ not per exact meter, in v1.
 - **Database:** PostgreSQL + PostGIS
 - **Testing:** xUnit
 - **API (available):**
+  - `GET /api/curbs?bbox=minLon,minLat,maxLon,maxLat&at=&permit=` (map, GeoJSON)
   - `GET /api/curbs/at?lat=&lon=&mode=&at=&permit=`
   - `GET /api/curbs/lookup?lat=&lon=&mode=`
   - `GET /api/curbs/{segmentId}`
@@ -101,6 +102,16 @@ ParkSure/
 ├── db/                      # Schema, migrations, bulk rule loading SQL
 └── docs/                    # Specifications, ADRs, test scenarios
 
+
+## Running the API
+
+```bash
+cd ParkSure.Api
+dotnet run --launch-profile http
+```
+
+In Development, Swagger UI is at http://localhost:5277/swagger
+(OpenAPI spec: http://localhost:5277/openapi/v1.json).
 
 ## Running the tests
 
