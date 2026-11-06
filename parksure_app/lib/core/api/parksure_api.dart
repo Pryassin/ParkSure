@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../features/map/data/curb_map_json.dart';
@@ -34,12 +35,19 @@ class ParkSureApi {
   /// Throws [ApiErrorKind.tooLarge] when the area is too big; the map should
   /// ask the user to zoom in.
   Future<CurbMap> getMap(GeoBounds bounds, {DateTime? at, String? permit}) async {
-    final json = await _get('/api/curbs', {
+    final bytes = await _get('/api/curbs', {
       'bbox': bounds.toQuery(),
       'at': ?_time(at),
       'permit': ?_permit(permit),
     });
-    return _parse(() => curbMapFromJson(json));
+    // A map response can be a few hundred KB. Decoding it on a background
+    // isolate keeps the UI thread free, so panning never stutters.
+    // (On web, compute runs inline; there are no isolates.)
+    try {
+      return await compute(_decodeMap, bytes);
+    } on FormatException catch (e) {
+      throw ApiException(ApiErrorKind.server, 'Unexpected response from the server: ${e.message}');
+    }
   }
 
   /// "Can I park here?" for one point.
@@ -52,7 +60,7 @@ class ParkSureApi {
     DateTime? at,
     String? permit,
   }) async {
-    final json = await _get('/api/curbs/at', {
+    final bytes = await _get('/api/curbs/at', {
       'lat': '${point.lat}',
       'lon': '${point.lon}',
       'mode': mode.name,
@@ -60,7 +68,7 @@ class ParkSureApi {
       'at': ?_time(at),
       'permit': ?_permit(permit),
     });
-    return _parse(() => curbAnswerFromJson(json));
+    return _parse(() => curbAnswerFromJson(_decodeObject(bytes)!));
   }
 
   void close() => _client.close();
@@ -75,7 +83,8 @@ class ParkSureApi {
     return (trimmed == null || trimmed.isEmpty) ? null : trimmed;
   }
 
-  Future<Map<String, dynamic>> _get(String path, Map<String, String> query) async {
+  /// Sends the request and returns the body of a 200. Anything else throws.
+  Future<Uint8List> _get(String path, Map<String, String> query) async {
     final uri = _baseUrl.replace(path: path, queryParameters: query);
 
     final http.Response response;
@@ -87,9 +96,9 @@ class ParkSureApi {
       throw ApiException(ApiErrorKind.network, 'Could not reach the server: ${e.message}');
     }
 
-    final body = _decode(response);
-    if (response.statusCode == 200 && body != null) return body;
+    if (response.statusCode == 200) return response.bodyBytes;
 
+    final body = _decodeObject(response.bodyBytes);
     final message = body?['error'] as String? ?? 'HTTP ${response.statusCode}';
     final kind = switch (response.statusCode) {
       400 when message.contains('too large') => ApiErrorKind.tooLarge,
@@ -110,12 +119,27 @@ class ParkSureApi {
     }
   }
 
-  static Map<String, dynamic>? _decode(http.Response response) {
+  /// The JSON object in [bytes], or null if it is not a JSON object.
+  /// Always UTF-8: the map endpoint sends no charset, and `http` would
+  /// otherwise fall back to Latin-1 and break accented street names.
+  static Map<String, dynamic>? _decodeObject(Uint8List bytes) {
     try {
-      final decoded = jsonDecode(utf8.decode(response.bodyBytes));
+      final decoded = jsonDecode(utf8.decode(bytes));
       return decoded is Map<String, dynamic> ? decoded : null;
     } on FormatException {
       return null;
     }
+  }
+}
+
+/// Runs on a background isolate. Every failure becomes a [FormatException]
+/// because only simple errors cross isolate boundaries reliably.
+CurbMap _decodeMap(Uint8List bytes) {
+  final json = ParkSureApi._decodeObject(bytes);
+  if (json == null) throw const FormatException('map body is not a JSON object');
+  try {
+    return curbMapFromJson(json);
+  } on Object catch (e) {
+    throw FormatException('$e');
   }
 }
