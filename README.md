@@ -77,7 +77,7 @@ not per exact meter, in v1.
 | Signs loaded + linked to curbs (114,426 links) | ✅ Done |
 | Reviewed rules | ✅ 200 of 1,546 codes loaded, growing |
 | Evaluator (the decision logic) | ✅ Done (Milestone B3: pure zero-I/O engine) |
-| Unit Tests | ✅ Done (93/93 tests passing) |
+| Unit Tests | ✅ Done (117/117 tests passing) |
 | API | ✅ Done (Milestone B4: integration & `/api/curbs/at`) |
 | App UI (Flutter) | 📋 Planned |
 
@@ -105,8 +105,21 @@ ParkSure/
 
 ## Running the API
 
+The database password is **not** in `appsettings.json`. Set the full
+connection string once per machine with .NET user secrets (stored outside the
+repo, in `~/.microsoft/usersecrets/`):
+
 ```bash
 cd ParkSure.Api
+dotnet user-secrets set "ConnectionStrings:Default" \
+  "Host=localhost;Port=5433;Database=parking;Username=postgres;Password=YOUR_PASSWORD"
+dotnet user-secrets list   # check it
+```
+
+User secrets are only loaded in Development. In other environments, set the
+`ConnectionStrings__Default` environment variable instead.
+
+```bash
 dotnet run --launch-profile http
 ```
 
