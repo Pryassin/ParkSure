@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'core/theme/app_style.dart';
-import 'dev/widget_gallery.dart';
+import 'features/map/presentation/map_screen.dart';
 
 void main() {
   runApp(const ParkSureApp());
@@ -17,10 +17,11 @@ class ParkSureApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppStyle.black),
+        fontFamily: AppStyle.fontFamily,
         scaffoldBackgroundColor: AppStyle.background,
       ),
-      // Temporary: shows every shared widget. Replace with the map screen later.
-      home: const WidgetGallery(),
+      // The widget gallery is still in lib/dev/widget_gallery.dart.
+      home: const MapScreen(),
     );
   }
 }

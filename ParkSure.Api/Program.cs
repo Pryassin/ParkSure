@@ -37,6 +37,14 @@ builder.Services.AddResponseCompression();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+// Development only: let the Flutter web app (served from another localhost
+// port) call the API. Production CORS is decided when the app is deployed.
+const string DevCors = "DevLocalhost";
+builder.Services.AddCors(o => o.AddPolicy(DevCors, p => p
+    .SetIsOriginAllowed(origin => Uri.TryCreate(origin, UriKind.Absolute, out var uri) && uri.IsLoopback)
+    .WithMethods("GET")
+    .AllowAnyHeader()));
+
 var app = builder.Build();
 app.UseResponseCompression();
 
@@ -47,6 +55,7 @@ if (app.Environment.IsDevelopment())
     {
         o.SwaggerEndpoint("/openapi/v1.json", "ParkSure API v1");
     });
+    app.UseCors(DevCors);
 }
 
 app.UseAuthorization();
