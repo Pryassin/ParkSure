@@ -54,6 +54,7 @@ not per exact meter, in v1.
 - **Database:** PostgreSQL + PostGIS
 - **Testing:** xUnit
 - **API (available):**
+  - `GET /api/curbs?bbox=minLon,minLat,maxLon,maxLat&at=&permit=` (map, GeoJSON)
   - `GET /api/curbs/at?lat=&lon=&mode=&at=&permit=`
   - `GET /api/curbs/lookup?lat=&lon=&mode=`
   - `GET /api/curbs/{segmentId}`
@@ -76,7 +77,7 @@ not per exact meter, in v1.
 | Signs loaded + linked to curbs (114,426 links) | ✅ Done |
 | Reviewed rules | ✅ 200 of 1,546 codes loaded, growing |
 | Evaluator (the decision logic) | ✅ Done (Milestone B3: pure zero-I/O engine) |
-| Unit Tests | ✅ Done (93/93 tests passing) |
+| Unit Tests | ✅ Done (117/117 tests passing) |
 | API | ✅ Done (Milestone B4: integration & `/api/curbs/at`) |
 | App UI (Flutter) | 📋 Planned |
 
