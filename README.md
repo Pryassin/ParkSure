@@ -103,28 +103,23 @@ ParkSure/
 └── docs/                    # Specifications, ADRs, test scenarios
 
 
-## Running the API
+## Configuration
 
-The database password is **not** in `appsettings.json`. Set the full
-connection string once per machine with .NET user secrets (stored outside the
-repo, in `~/.microsoft/usersecrets/`):
+The database connection string is **not** stored in the repo. Set it once per machine with .NET user-secrets (stored in `~/.microsoft/usersecrets/`, outside the repo):
 
 ```bash
-cd ParkSure.Api
 dotnet user-secrets set "ConnectionStrings:Default" \
-  "Host=localhost;Port=5433;Database=parking;Username=postgres;Password=YOUR_PASSWORD"
-dotnet user-secrets list   # check it
+  "Host=localhost;Port=5433;Database=parking;Username=postgres;Password=<your password>" \
+  --project ParkSure.Api
 ```
 
-User secrets are only loaded in Development. In other environments, set the
-`ConnectionStrings__Default` environment variable instead.
+Or use an environment variable (works on servers and in CI):
 
 ```bash
-dotnet run --launch-profile http
+export ConnectionStrings__Default="Host=...;Password=..."
 ```
 
-In Development, Swagger UI is at http://localhost:5277/swagger
-(OpenAPI spec: http://localhost:5277/openapi/v1.json).
+User-secrets are only loaded in the `Development` environment, which is the default for `dotnet run`.
 
 ## Running the tests
 
